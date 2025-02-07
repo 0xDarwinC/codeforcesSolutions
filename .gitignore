@@ -1,0 +1,22 @@
+# Ignore VS Code settings
+.vscode/
+
+# Ignore compiled binaries
+*.exe
+*.out
+*.o
+
+# Ignore backup files
+*.bak
+*.swp
+*.swo
+
+# Ignore logs and system files
+*.log
+*.tmp
+*.DS_Store
+Thumbs.db
+
+# Ignore CPH test case outputs
+*.testcases
+*.expected
