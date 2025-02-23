@@ -35,13 +35,35 @@ template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a)
 // ===================================END Of the input module ==========================================
 
 int32_t main(){
-	int x;
-	cin>>x;
-	if(x % 2 == 0){
-		cout<<"YES";
-	}
-	else{
-		cout<<"NO";
-	}
-	return 0;
+    int n, t, x;
+    cin>>n>>t;
+    vi vec;
+    for(int i = 0; i < n; i++){
+        cin>>x;
+        vec.push_back(x);
+    }
+    int postfix = 0;
+    int p1 = vec.size()-1;
+    int p2 = p1;
+    int best = -1;
+    while(p2 >= 0){
+        postfix+=vec[p2];
+        if(postfix <= t){
+            if((p1-p2+1) > best){
+                best = p1-p2+1;
+            }
+            p2-=1;
+        }
+        else{
+            if(vec[p2] > t){
+                p2-=1;
+            }
+            p1 = p2;
+            postfix = 0;
+        }
+    }
+    if(best == -1){
+        best = 0;
+    }   
+    cout<<(best);
 }
