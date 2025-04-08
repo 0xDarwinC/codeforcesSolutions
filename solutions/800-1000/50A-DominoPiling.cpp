@@ -2,7 +2,7 @@
 #define int long long
 #define uint unsigned long long
 #define vi vector<int>
-#define vvi vector<vi >
+#define vvi vector<vi>
 #define vb vector<bool>
 #define vvb vector<vb >
 #define fr(i,n) for(int i=0; i<(n); i++)
@@ -35,19 +35,7 @@ template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a)
 // ===================================END Of the input module ==========================================
 
 int32_t main(){
-    int numOps;
-    int x = 0;
-    cin>>numOps;
-    cin.ignore();
-    string line;
-    for(int i = 0; i<numOps; i++){
-        getline(cin, line);
-        if(line[1] == '-'){
-            x--;
-        }
-        else{
-            x++;
-        }
-    }
-    printf("%d", x);
+	int x, y;
+	cin>>x>>y;
+	cout<<floor(x*y*0.5);
 }

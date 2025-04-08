@@ -42,28 +42,29 @@ int32_t main(){
         cin>>x;
         vec.push_back(x);
     }
-    int postfix = 0;
-    int p1 = vec.size()-1;
-    int p2 = p1;
-    int best = -1;
-    while(p2 >= 0){
-        postfix+=vec[p2];
-        if(postfix <= t){
-            if((p1-p2+1) > best){
-                best = p1-p2+1;
-            }
-            p2-=1;
+    int p1 = n-1;
+    int p2 = n-1;
+    int sum = 0;
+    int best = 0;
+    while(p1 >= 0){
+        sum+=vec[p1];
+        if(sum <= t){
+            p1-=1;
+            best = max(p2-p1, best);
+        }
+        else if (vec[p1] > t)
+        {
+            p1-=1;
+            p2=p1;
+            sum = 0;
         }
         else{
-            if(vec[p2] > t){
+            while(sum > t){
+                sum-=vec[p2];
                 p2-=1;
             }
-            p1 = p2;
-            postfix = 0;
+            sum-=vec[p1];
         }
     }
-    if(best == -1){
-        best = 0;
-    }   
-    cout<<(best);
+    cout<<best;
 }
