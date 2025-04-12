@@ -57,70 +57,124 @@ ostream &operator<<(ostream &cout, const vector<typC> &a)
 }
 // ===================================END Of the input module ==========================================
 
-const vi candidates = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+const int divs = 1/9;
 
-void bt(int n, int p, vi curr, int sum, int s, vvi &total)
-{
-
-    if (p == n)
-    {
-        if (sum == s)
-        {
-            total.push_back(curr);
+int32_t main(){
+    int n,s;
+    cin>>n>>s;
+    if(n==s){
+        int needed = s*divs;
+        string min = "";
+        int extra = s-(s*divs);
+        min = string(needed,'9');
+        if(extra != 0){
+            min = to_string(extra)+min;
+            needed+=1;
         }
-        return;
+        //now add 1000
     }
-
-    bool can = true;
-    if (p == 0)
-    {
-        can = false;
+    if(s == 0 || s > 9*n){
+        cout<<"-1 -1";
     }
-
-    for (int num : candidates)
-    {
-        if (num == 0 && !can)
-        {
-            continue;
-        }
-        else
-        {
-            if (sum + num > s)
-            {
-                break;
+    else if(s <= 9){
+        
+    }
+    else{
+        string answer = "";
+        string answer2 = "";
+        int curr = 0;
+        fr(i,n){
+            if(curr+9<=s){
+                answer+="9";
+                answer2 = "9" + answer2;
+                curr+=9;
+                if(curr==s){
+                    break;
+                }
             }
-            else
-            {
-                vi news = curr;
-                news.push_back(num);
-                bt(n, p + 1, news, sum + num, s, total);
+            else{
+                answer+=(to_string(s-curr));
+                answer2 = (to_string(s-curr)) + answer2;
+                curr+=(s-curr);
             }
         }
+        if(answer2[0] == '0'){
+            fr(i,n){
+                if(answer2[i]!='0'){
+                    answer2[0] = answer2[i];
+                    answer2[i] = '0';
+                    break;
+                }
+            }
+        }
+        cout<<answer2<<" "<<answer;
     }
 }
 
-int32_t main()
-{
-    // strat -- backtracking, build up the list at each step, if the sum exceeds prune or if length is max prune. Find the valid vec with the smallest first val.
-    int n, s;
-    cin >> n >> s;
-    if (s<n || s>9*n)
-    {
-        cout << "-1 -1";
-    } 
-    else
-    {
-        vvi total;
-        vi curr;
-        bt(n, 0, curr, 0, s, total);
-        srt(total);
-        string str = "";
-        for (int i : total[0])
-        {
-            str = str + to_string(i);
-        }
-        cout << str << " ";
-        reverse(str.begin(), str.end());
-        cout << str;
-    }
-}
+// const vi candidates = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+// void bt(int n, int p, vi curr, int sum, int s, vvi &total)
+// {
+
+//     if (p == n)
+//     {
+//         if (sum == s)
+//         {
+//             total.push_back(curr);
+//         }
+//         return;
+//     }
+
+//     bool can = true;
+//     if (p == 0)
+//     {
+//         can = false;
+//     }
+
+//     for (int num : candidates)
+//     {
+//         if (num == 0 && !can)
+//         {
+//             continue;
+//         }
+//         else
+//         {
+//             if (sum + num > s)
+//             {
+//                 break;
+//             }
+//             else
+//             {
+//                 vi news = curr;
+//                 news.push_back(num);
+//                 bt(n, p + 1, news, sum + num, s, total);
+//             }
+//         }
+//     }
+// }
+
+// int32_t main()
+// {
+//     // strat -- backtracking, build up the list at each step, if the sum exceeds prune or if length is max prune. Find the valid vec with the smallest first val.
+//     int n, s;
+//     cin >> n >> s;
+//     if (s<n || s>9*n)
+//     {
+//         cout << "-1 -1";
+//     } 
+//     else
+//     {
+//         vvi total;
+//         vi curr;
+//         bt(n, 0, curr, 0, s, total);
+//         srt(total);
+//         string str = "";
+//         for (int i : total[0])
+//         {
+//             str = str + to_string(i);
+//         }
+//         cout << str << " ";
+//         reverse(str.begin(), str.end());
+//         cout << str;
+//     }
+// }
