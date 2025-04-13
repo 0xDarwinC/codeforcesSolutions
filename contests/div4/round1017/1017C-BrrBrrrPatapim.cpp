@@ -35,5 +35,36 @@ template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a)
 // ===================================END Of the input module ==========================================
 
 int32_t main(){
+    int t;
+    cin>>t;
+    cin.ignore();
+    int n;
+    //vvi grid;
+    int curr;
+    vi pass;
+    int sum;
+    int largest;
+    fr(sz,t){
+        cin>>n;
+        cin.ignore();
+        //grid = vvi(n,vi(n));
+        pass = vi(2*n, 0);
 
+        for(int i = 1; i<=n; i++){
+            for(int j = 1; j<=n; j++){
+                cin>>curr;
+                pass[i+j-1] = curr;
+            }
+        }
+
+        pass[0] = ((2*n)*((2*n)+1)/2) - (accumulate(pass.begin(), pass.end(), 0));
+        fr(i,2*n){
+            if(i==2*n-1){
+                cout<<pass[i]<<'\n';
+            }
+            else{
+                cout<<pass[i]<<" ";
+            }
+        }
+    }
 }

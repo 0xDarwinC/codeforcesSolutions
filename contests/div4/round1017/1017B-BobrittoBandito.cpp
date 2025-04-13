@@ -35,5 +35,41 @@ template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a)
 // ===================================END Of the input module ==========================================
 
 int32_t main(){
-
+    int numlines,n,m,l,r;
+    cin>>numlines;
+    cin.ignore();
+    fr(i,numlines){
+        cin>>n>>m>>l>>r;
+        cin.ignore();
+        if(n==m){
+            cout<<l<<" "<<r<<'\n';
+        }
+        else{
+            // if(m >= n/2 && m>2){
+            //     cout<<l<<" "<<(l+m)<<'\n';
+            // }
+            // else{
+                int complement = m-(m/2);
+                //right side can fit it
+                if(r-complement >= 0 && l+(m/2) <= 0){
+                    r = complement;
+                    l = -1*(m/2);
+                    cout<<l<<" "<<r<<'\n';
+                }
+                else if(r-complement >= 0){
+                    r=l+m;
+                    cout<<l<<" "<<r<<'\n';
+                }
+                else if(l+complement <= 0 && r-(m/2) >= 0){
+                    l = -1*complement;
+                    r = m/2;
+                    cout<<l<<" "<<r<<'\n';
+                }
+                else{
+                    l = r-m;
+                    cout<<l<<" "<<r<<'\n';
+                }
+            //}
+        }
+    }
 }

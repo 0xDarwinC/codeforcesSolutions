@@ -35,5 +35,23 @@ template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a)
 // ===================================END Of the input module ==========================================
 
 int32_t main(){
-
+    string line;
+    string answer = "";
+    vi split;
+    int n, idx2, idx3;
+    cin>>n;
+    cin.ignore();
+    fr(i,n){
+        getline(cin,line);
+        answer+=line[0];
+        idx2 = -1;
+        idx2 = line.find(' ')+1;
+        answer+=line[idx2];
+        idx3 = -1;
+        line = line.substr(idx2);
+        idx3 = line.find(' ')+1;
+        answer+=line[idx3];
+        cout<<answer<<'\n';
+        answer = "";
+    }
 }

@@ -35,5 +35,49 @@ template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a)
 // ===================================END Of the input module ==========================================
 
 int32_t main(){
-
+    int t;
+    cin>>t;
+    cin.ignore();
+    int p1, p2;
+    int attempts;
+    string p;
+    string s;
+    bool fail = false;
+    fr(i,t){
+        getline(cin,p);
+        getline(cin,s);
+        p1 = 0;
+        p2 = 0;
+        attempts = 1;
+        while(p1<p.length() && p2<s.length()){
+            if(p1 == 0){
+                if(p[p1]!=s[p2]){
+                    cout<<"NO\n";
+                    fail=true;
+                    p1=p.length()+1;
+                    p2=s.length()+1;
+                }
+                else{
+                    if(p[p1]==s[p2]){
+                        p1+=1;
+                        p2+=1;
+                    }
+                    else{
+                        if(attempts!=0 && s[p2]==p[p1-1]){
+                            p2+=1;
+                        }
+                        else{
+                            cout<<"NO\n";
+                            fail=true;
+                            p1=p.length()+1;
+                            p2=s.length()+1;
+                        }
+                    }
+                }
+            }
+        }
+        if(fail==false){
+            cout<<"YES\n";
+        }
+    }
 }
