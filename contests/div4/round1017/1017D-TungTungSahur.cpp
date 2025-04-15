@@ -38,45 +38,46 @@ int32_t main(){
     int t;
     cin>>t;
     cin.ignore();
-    int p1, p2;
-    int attempts;
+    int l1, r1, l2, r2;
+    int len1, len2;
     string p;
     string s;
-    bool fail = false;
+    bool fail;
     fr(i,t){
+        fail = false;
         getline(cin,p);
         getline(cin,s);
-        p1 = 0;
-        p2 = 0;
-        attempts = 1;
-        while(p1<p.length() && p2<s.length()){
-            if(p1 == 0){
-                if(p[p1]!=s[p2]){
-                    cout<<"NO\n";
+        l1 = 0, r1 = l1, l2 = l1, r2 = l1;
+        while(r1 < p.length() && r2 < s.length()){
+            if(p[l1] != s[l2]){
+                fail = true;
+                r1 = p.length();
+            }
+            else{
+                while(r1 < p.length()-1 && p[r1] == p[r1+1]){
+                    r1+=1;
+                }
+                while(r2 < s.length()-1 && s[r2] == s[r2+1]){
+                    r2+=1;
+                }
+                len1 = r1-l1+1;
+                len2 = r2-l2+1;
+                if(len2<len1 || len2 > 2*len1){
                     fail=true;
-                    p1=p.length()+1;
-                    p2=s.length()+1;
+                    r1 = p.length();
                 }
                 else{
-                    if(p[p1]==s[p2]){
-                        p1+=1;
-                        p2+=1;
-                    }
-                    else{
-                        if(attempts!=0 && s[p2]==p[p1-1]){
-                            p2+=1;
-                        }
-                        else{
-                            cout<<"NO\n";
-                            fail=true;
-                            p1=p.length()+1;
-                            p2=s.length()+1;
-                        }
-                    }
+                    r1+=1;
+                    r2+=1;
+                    l1 = r1;
+                    l2 = r2;
                 }
             }
         }
-        if(fail==false){
+        if(fail || r1 != p.length() || r2 != s.length()){
+            cout<<"NO\n";
+        }
+        else{
             cout<<"YES\n";
         }
     }
