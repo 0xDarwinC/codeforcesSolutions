@@ -39,46 +39,44 @@ template<typename typC,typename typD> ostream &operator<<(ostream &cout,const ve
 template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a) { int n=a.size(); if (!n) return cout; cout<<a[0]; for (int i=1; i<n; i++) cout<<' '<<a[i]; return cout; }
 // ===================================END Of the input module ==========================================
 
+void solve(){
+    int n; cin>>n;
+    vi cnt(30,0);
+    vi arr(n);
+    // for each num, adds count of num digits that are on
+    for(int i=0; i<n;i++){
+        cin>>arr[i];
+        for(int j = 0; j<30; j++){
+            cnt[j] += ((arr[i]>>j)&1);
+        }
+    }
+    int best = -1;
+    int curr = 0;
+    // now, for each num calculate the sum bit by bit, make sure to multiply by 2^j for each bit
+    for(int i=0; i<n; i++){
+        curr = 0;
+        for(int j=0;j<30;j++){
+            if((arr[i]>>j)&1){
+                curr+=((n-cnt[j]) << j);
+            }
+            else{
+                curr+=(cnt[j] << j);
+            }
+        }
+        if(curr>best){
+            best = curr;
+        }
+    }
+    cout<<best<<'\n';
+}
+
 signed main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    vi nums;
-    int t;
-    cin>>t;
-    int len;
-    int x;
-    int max;
-    int bestsum;
-    int sum;
-    int bestnum;
-    unordered_map<int,int> memo;
-    cout<<(mp(1,2))<<"hellyea";
-    fr(i,t){
-        cin>>len;
-        nums=vi();
-        max = -1;
-        bestsum=-1;
-        bestnum = -1;
-        fr(j,len){
-            cin>>x;
-            if(x>max){
-                max=x;
-            }
-            cout<<bin(x,8)<<" ";
-            nums.pb(x);
-        }
-        cout<<"\n";
-        fr(j,len){
-            sum = 0;
-            fr(k,len){
-                sum += (nums[k]^nums[j]);
-            }
-            if(sum>bestsum){
-                bestsum=sum;
-                bestnum=nums[j];
-            }
-        }
-        cout<<bestsum<<"and best"<<bestnum<<'\n';
+    int t; cin>>t;
+    while(t--){
+        solve();
     }
     return 0;
 }
+
