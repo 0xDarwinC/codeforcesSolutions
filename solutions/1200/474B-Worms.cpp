@@ -59,6 +59,5 @@ signed main(){
         idx = lower_bound(piles.begin(),piles.end(),juicy)-piles.begin();
         cout<<(idx+1)<<'\n';
     }
-    piles.
     return 0;
 }
