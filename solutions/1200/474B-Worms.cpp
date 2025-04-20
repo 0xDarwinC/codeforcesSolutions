@@ -12,8 +12,8 @@
 #define mp make_pair
 #define fr(i,n) for(int i=0; i<(n); i++)
 #define rep(i,a,n) for(int i=(a); i<=(n); i++)
-#define nl cout<<"\n"
-#define dbg(var) cout<<#var<<"="<<var<<" "
+#define nl "\n"
+#define dbg(var) cerr<<#var<<"="<<var<<" "
 #define all(v) v.begin(),v.end()
 #define srt(v)  sort(v.begin(),v.end())         // sort 
 #define mxe(v)  *max_element(v.begin(),v.end())     // find max element in vector
@@ -56,8 +56,9 @@ signed main(){
     int idx;
     fr(i,m){
         cin>>juicy;
+        dbg(juicy);
         idx = lower_bound(piles.begin(),piles.end(),juicy)-piles.begin();
-        cout<<(idx+1)<<'\n';
+        cout<<(idx+1)<<nl;
     }
     return 0;
 }
