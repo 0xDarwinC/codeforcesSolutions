@@ -53,26 +53,12 @@ signed main(){
     }
     cin>>m;
     int juicy;
-    int l,r,mid,best;
+    int idx;
     fr(i,m){
-        l=0;
-        r=n-1;
-        best=n+1;
         cin>>juicy;
-        while(l<=r){
-            mid = (l+r)/2;
-            if(juicy>piles[mid]){
-                l=mid+1;
-            }
-            else{
-                if(mid<best){
-                    best=mid;
-                }
-                r=mid-1;
-            }
-        }
-        
-        cout<<(best+1)<<'\n';
+        idx = lower_bound(piles.begin(),piles.end(),juicy)-piles.begin();
+        cout<<(idx+1)<<'\n';
     }
+    piles.
     return 0;
 }
