@@ -38,97 +38,29 @@ template<typename typC,typename typD> ostream &operator<<(ostream &cout,const pa
 template<typename typC,typename typD> ostream &operator<<(ostream &cout,const vector<pair<typC,typD>> &a) { for (auto &x:a) cout<<x<<'\n'; return cout; }
 template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a) { int n=a.size(); if (!n) return cout; cout<<a[0]; for (int i=1; i<n; i++) cout<<' '<<a[i]; return cout; }
 // ===================================END Of the input module ==========================================
-int cos(string s){
-    int cost = 0;
-    bool zero = true;
-    for(int i = 0; i<s.length(); i++){
-        if(s[i]=='0'){
-            if(zero){
-                cost+=1;
-            }
-            else{
-                cost+=2;
-                zero=true;
-            }
-        }
-        else{
-            if(!zero){
-                cost+=1;
-            }
-            else{
-                cost+=2;
-                zero=false;
-            }
-        }
-    }
-    return cost;
-}
 
 void solve(){
     int n; cin>>n; cin.ignore();
     string s; getline(cin,s);
-    if(n<4){
-        if(n==1){
-            if(s=="0"){
-                cout<<1<<nl;
-            }
-            else{
-                cout<<2<<nl;
-            }
+    int p = 0;
+    int changes = 0;
+    bool zero = true;
+    while(p<n){
+        if((s[p]=='0' && !zero) || (s[p]=='1' && zero)){
+            zero = !zero;
+            changes++;
         }
-        else if(n==2){
-            if(s=="00"){
-                cout<<2<<nl;
-            }
-            else{
-                cout<<3<<nl;
-            }
-        }
-        else{
-            if(s=="000"){
-                cout<<3<<nl;
-            }
-            else{
-                cout<<4<<nl;
-            }
-        }
+        p++;
     }
+    if(changes>=3){
+        cout<<n+changes-2<<nl;
+    }
+    else if(changes==2){
+        cout<<n+changes-1<<nl;
+    }   
     else{
-        int cost = cos(s);
-        int reduce = 0;
-        bool zero = true;
-        if(s[0]=='1'&&s[n-1]=='0'){
-            reduce = 1;
-        }
-        int p = 0;
-        while(p<n-1){
-            if(p==0){
-                if(s[p]=='1'&&s[p+1]=='0'&&s[p+2]=='1'){
-                    reduce = 1;
-                }
-            }
-            else if(p==n-2){
-                if(s[p]=='1'&&s[p+1]=='0'&&s[p-1]=='0'){
-                    reduce = 1;
-                }
-                else if(s[p]=='0'&&s[p+1]=='1'&&s[p-1]=='1'){
-                    reduce = 1;
-                }
-            }
-            else{
-                if(s[p] == '1' && s[p+1] == '0' && s[p-1] == '0' && s[p+2] == '1'){
-                    cout<<cost-2<<nl;
-                    return;
-                }
-                else if(s[p] == '0' && s[p+1] == '1' && s[p-1] == '1' && s[p+2] == '0'){
-                    cout<<cost-2<<nl;
-                    return;
-                }
-            }
-            p+=1;
-        }
-        cout<<cost-reduce<<nl;
-    }
+        cout<<n+changes<<nl;
+    } 
 }
 
 signed main(){
