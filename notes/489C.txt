@@ -1,0 +1,8 @@
+greedy approach is the best i figured out, should run in O(n) so who can complain
+
+0. check if m is too small to ever reach s. if so, return -1 -1
+1. first check if s=0. if m!=0, return -1-1, else 0 0.  if s=1, then just set the first digit to 1 and rest to 0 and then return it twice.
+2. greedily set all digits to 9. reduce as necessary starting from right till the value is equal to sum. this is the max value.
+3. flip the number (good idea to start as a string).
+4. if the first digit is now a 0, set it to 1. then, look for the first digit that you can subtract 1 from.
+5. finally, return both nums
