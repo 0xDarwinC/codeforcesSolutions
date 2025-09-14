@@ -1,0 +1,32 @@
+4 vars
+
+    2 for bools cooldowns
+    2 for pointers, secondary for accel
+    int tally for ans
+
+cases
+
+
+rest day 0
+
+    reset cooldowns and add 1 to tally
+
+
+contest 1
+
+    if no cooldown do it and add cooldown
+    else rest and reset both cooldowns
+
+
+gym 2
+
+    same as above but for gym
+
+
+both 3
+
+    if cooldown on 1 do the other
+    if no cooldown
+    search until you find a rest day, or 1 or 2. 
+    if rest, reset cooldowns and add 1 to tally, moving ptr to one after loc
+    if a restrictive, wipe cooldowns and set the restricted to cooldown, and then move ptr to one after loc. dont increase tally
