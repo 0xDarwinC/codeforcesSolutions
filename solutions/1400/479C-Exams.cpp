@@ -48,7 +48,7 @@ signed main(){
     // return the tally at the end
     // nlgn only because of sort, but the processes are o(n)
 
-    vector<pair<int,int>> nums;
+    vector<pi> nums;
 
     int n,x,y; cin>>n;
     pi p;
