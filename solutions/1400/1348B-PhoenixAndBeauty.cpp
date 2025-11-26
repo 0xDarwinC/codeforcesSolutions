@@ -39,52 +39,10 @@ template<typename typC,typename typD> ostream &operator<<(ostream &cout,const ve
 template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a) { int n=a.size(); if (!n) return cout; cout<<a[0]; for (int i=1; i<n; i++) cout<<' '<<a[i]; return cout; }
 // ===================================END Of the input module ==========================================
 
-int bask(const vi& nums1, const vi& nums2, int last, int idx, vector<vi>& memo){
-    if(idx>=nums1.size()){
-        return 0;
-    }
-    else if(memo[last][idx] != -1){
-        return memo[last][idx];
-    }
-
-    if(last==0){
-        memo[last][idx] = max(nums1[idx]+bask(nums1,nums2,1,idx+1,memo), max(nums2[idx]+bask(nums1,nums2,2,idx+1,memo), bask(nums1,nums2,0,idx+1,memo)));
-    }
-    else if(last==1){
-        memo[last][idx] = max(nums2[idx]+bask(nums1,nums2,2,idx+1,memo), bask(nums1,nums2,0,idx+1,memo));
-    }
-    else{
-        memo[last][idx] = max(nums1[idx]+bask(nums1,nums2,1,idx+1,memo), bask(nums1,nums2,0,idx+1,memo));
-    }
-    return memo[last][idx];
-}
-
 signed main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
-    // dp idea, at any point we can either choose top, bottom, or neither. 
-    // return the max of these choices.
-    // for top or bottom its height + dp(future)
-    // else its just dp(future)
-    // needs to also have an arg to say what was picked last
-    // 0 neither, 1 top, 2 bot
-    // too slow so try memoization?
-    // memo table has 3 rows: each for last picked
-    // columns are the idx of the nums array
-    
-    int n; cin>>n;
-    vector<vi> memo(3,vi(n,-1));
-    vi nums1; vi nums2;
-    int x;
-    fr(i,n){
-        cin>>x;
-        nums1.pb(x);
-    }
-    fr(i,n){
-        cin>>x;
-        nums2.pb(x);
-    }
-    cout<<bask(nums1,nums2,0,0, memo);
+
     return 0;
 }
