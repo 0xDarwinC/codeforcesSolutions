@@ -43,6 +43,55 @@ signed main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
-    
+    int n; int k;
+    cin>>n>>k;
+    vi nums;
+    int x;
+    fr(i,n){
+        cin>>x;
+        nums.pb(x);
+    }
+    srt(nums);
+
+    // sort the nums
+    // create signposts at each increase in num starting from mid.
+    // we check if we have enough k to reach the next signpost, continue
+    // the number of signposts we clear plus the original mid value is the answer
+
+
+    int p = n/2;
+    vector<pi> signs;
+    int best = nums[p];
+    bool leftover = true;
+    while(p<n-1){
+        if(nums[p+1]>nums[p]){
+            signs.pb({p+1,nums[p+1]-nums[p]});
+        }
+        p+=1;
+    }
+    for(pi pair : signs){
+        // if we have enough k to jump the whole subseq to next sign
+        if(k >= (pair.F - n/2)*pair.S){
+            k-=(pair.F - n/2)*pair.S;
+            best+=pair.S;
+        }
+        else{
+            leftover = false;
+            break;
+        }
+    }
+    // if we have leftover lets see if we can increase it further
+    if(leftover){
+        while(k>0){
+            if(k >= (n - n/2)){
+                k-=(n - n/2);
+                best+=1;
+            }
+            else{
+                k=0;
+            }
+        }
+    }
+    cout<<best;
     return 0;
 }
