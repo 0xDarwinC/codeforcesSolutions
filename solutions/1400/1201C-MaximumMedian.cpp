@@ -39,6 +39,25 @@ template<typename typC,typename typD> ostream &operator<<(ostream &cout,const ve
 template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a) { int n=a.size(); if (!n) return cout; cout<<a[0]; for (int i=1; i<n; i++) cout<<' '<<a[i]; return cout; }
 // ===================================END Of the input module ==========================================
 
+bool verifier(int m, const vi& nums, int k){
+    int ops = 0;
+    for(int i = nums.size()/2; i<nums.size(); i++){
+        if(nums[i]<m){
+            ops+=(m-nums[i]);
+        }
+
+        if(ops>k){
+            return false;
+        }
+    }
+    if(ops<=k){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 signed main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
@@ -52,43 +71,21 @@ signed main(){
         nums.pb(x);
     }
     srt(nums);
-
-    // sort the nums
-    // create signposts at each increase in num starting from mid.
-    // we check if we have enough k to reach the next signpost, continue
-    // the number of signposts we clear plus the original mid value is the answer
-
-
-    int p = n/2;
-    vector<pi> signs;
-    int best = nums[p];
-    bool leftover = true;
-    int end = n;
-    while(p<n-1){
-        if(nums[p+1]>nums[p]){
-            signs.pb({p+1,nums[p+1]-nums[p]});
-        }
-        p+=1;
-    }
-    for(pi pair : signs){
-        // if we have enough k to jump the whole subseq to next sign
-        if(k >= (pair.F - n/2)*pair.S){
-            k-=(pair.F - n/2)*pair.S;
-            best+=pair.S;
+    // bin search on answer
+    // to make median we just need to augment the right half of array
+    // if we have enough ops cool
+    // else we try to make a smaller median
+    // nlgn
+    int best = nums[nums.size()/2];
+    int l = best; int r = 2000000000;
+    while(l<=r){
+        int mid = (l+r)/2;
+        if(verifier(mid,nums,k)){
+            best = max(best,mid);
+            l = mid+1;
         }
         else{
-            end = p+1;
-            break;
-        }
-    }
-    // if we have leftover lets see if we can increase it further
-    while(k>0){
-        if(k >= (end - n/2)){
-            k-=(end - n/2);
-            best+=1;
-        }
-        else{
-            k=0;
+            r=mid-1;
         }
     }
     cout<<best;
