@@ -39,15 +39,12 @@ template<typename typC,typename typD> ostream &operator<<(ostream &cout,const ve
 template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a) { int n=a.size(); if (!n) return cout; cout<<a[0]; for (int i=1; i<n; i++) cout<<' '<<a[i]; return cout; }
 // ===================================END Of the input module ==========================================
 
-signed main(){
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    // we can sieve of erastosthenes up to k O(10^9)
-    // we need to check if all mults of the prime exist in a.
-    // somehow need to do that in o(1). seems unlikely.
+struct Node{
+    int val;
+    Node *left;
+    Node *right;
 
-    // or we can prime factorize all nums in a.
-    // if they all share the same 
-
-    return 0;
-}
+    Node() : val(0), left(nullptr), right(nullptr) {}
+    Node(int x) : val(x), left(nullptr), right(nullptr) {}
+    Node(int x, Node *left, Node *right) : val(x), left(left), right(right) {}
+};
