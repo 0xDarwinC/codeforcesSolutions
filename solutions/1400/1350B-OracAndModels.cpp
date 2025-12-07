@@ -39,7 +39,7 @@ template<typename typC,typename typD> ostream &operator<<(ostream &cout,const ve
 template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a) { int n=a.size(); if (!n) return cout; cout<<a[0]; for (int i=1; i<n; i++) cout<<' '<<a[i]; return cout; }
 // ===================================END Of the input module ==========================================
 
-int dp(int idx, int n, vi& memo, map<int,int>& nums){
+int dp(int idx, int n, vi& memo, vi& nums){
     if(memo[idx]!=-1){
         return memo[idx];
     }
@@ -73,7 +73,7 @@ signed main(){
     int t; cin>>t;
     while(t--){
         int n; int x; cin>>n;
-        map<int,int> nums;
+        vi nums(n+1);
         fr(i,n){
             cin>>x;
             nums[i+1]=x;
@@ -83,7 +83,6 @@ signed main(){
             // we need to start at each index so all options explored
             dp(i+1, n, memo, nums);
         }
-        dbg(memo);
         cout<<mxe(memo)<<endl;        
     }
 
