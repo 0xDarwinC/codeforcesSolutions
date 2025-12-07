@@ -42,12 +42,7 @@ template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a)
 signed main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    // we can sieve of erastosthenes up to k O(10^9)
-    // we need to check if all mults of the prime exist in a.
-    // somehow need to do that in o(1). seems unlikely.
-
-    // or we can prime factorize all nums in a.
-    // if they all share the same 
+    
 
     return 0;
 }

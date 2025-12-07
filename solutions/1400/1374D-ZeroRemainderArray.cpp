@@ -48,11 +48,12 @@ signed main(){
     // the number of steps is bounded by the dist with highest occurence
     // return the # steps to reach that.
     // but if the dists are tied, choose the later one and use that as the bound
+    // use map instead because nums of size k is so unecessary
 
     int t; cin>>t;
     fr(_,t){
         int n; int k; cin>>n>>k;
-        vi nums(k,0);
+        map<int,int> nums;
         int x;
         fr(i,n){
             cin>>x;
@@ -63,13 +64,19 @@ signed main(){
         }
         int idx = 0;
         int best = 0;
-        fr(i,k){
-            if(nums[i]>=best){
-                best = nums[i];
+        for(auto const& [i, tally] : nums){
+            if(tally>=best){
+                best = tally;
                 idx = i;
             }
         }
-        cout<<(k*best - (k-idx))+1<<endl;
+        if(best==0){
+            cout<<0<<endl;
+        }
+        else{
+            cout<<(k*best - (k-idx))+1<<endl;
+        }
+        
     }
 
     return 0;
