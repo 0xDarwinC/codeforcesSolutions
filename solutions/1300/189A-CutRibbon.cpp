@@ -39,12 +39,30 @@ template<typename typC,typename typD> ostream &operator<<(ostream &cout,const ve
 template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a) { int n=a.size(); if (!n) return cout; cout<<a[0]; for (int i=1; i<n; i++) cout<<' '<<a[i]; return cout; }
 // ===================================END Of the input module ==========================================
 
+int dp(int n, int a, int b, int c, unordered_map<int,int>& memo){
+    if(memo.find(n)!=memo.end()){
+        return memo[n];
+    }
+    if(n<0){
+        return -8000;
+    }
+    if(n==0){
+        return 0;
+    }
+    memo[n] = 1+max(dp(n-a,a,b,c,memo),max(dp(n-b,a,b,c,memo),dp(n-c,a,b,c,memo)));
+    return memo[n];
+}
+
 signed main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    
-    int x;
-    int y;
-    
+    // we can do a dp formulation
+    // at each step we can cut by a, b or c (if enough length).
+    // Take the max of all
+    int n; int a; int b; int c;
+    cin>>n>>a>>b>>c;
+    unordered_map<int,int> memo;
+    cout<<dp(n,a,b,c,memo);
+
     return 0;
 }
